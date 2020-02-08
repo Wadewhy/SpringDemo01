@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                              http://www.springframework.org/schema/beans/spring-beans.xsd
+                              http://www.springframework.org/schema/context 
+                              http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 将对象交给Spring管理 -->
+	<bean name="persons" class="xyz.wadewhy.SpringDemo01.pojo.Persons"></bean>
+
+
+	<!-- 构造注入 按类型匹配入参方式 -->
+	<bean id="Car" class="xyz.wadewhy.SpringDemo01.pojo.Car">
+
+		<constructor-arg type="String">
+			<value>宝马</value>
+		</constructor-arg>
+		<constructor-arg type="double">
+			<value>300000</value>
+		</constructor-arg>
+		<constructor-arg type="int" value="40"></constructor-arg>
+	</bean>
+
+	<!-- 构造注入，按索引匹配入参 -->
+	<bean id="Car2" class="xyz.wadewhy.SpringDemo01.pojo.Car">
+
+		<constructor-arg index="0" value="奔驰" />
+		<constructor-arg index="1" value="2500000.0">
+		</constructor-arg>
+		<constructor-arg index="2" value="30"></constructor-arg>
+	</bean>
+
+	<!-- 构造注入，同时使用按参数和索引匹配 -->
+	<bean id="Car3" class="xyz.wadewhy.SpringDemo01.pojo.Car2">
+		<constructor-arg index="0" type="String">
+			<value>BYD</value>
+		</constructor-arg>
+
+		<constructor-arg index="1" type="String">
+			<value>wadewhy</value>
+		</constructor-arg>
+
+		<constructor-arg index="2" type="double">
+			<value>100000.389</value>
+		</constructor-arg>
+	</bean>
+
+	<!--构造注入，按自身类型反射匹配注入 -->
+	<bean id="User" class="xyz.wadewhy.SpringDemo01.pojo.User">
+		<constructor-arg>
+			<value>wadehy</value>
+		</constructor-arg>
+
+		<constructor-arg>
+			<ref bean="Car" />
+		</constructor-arg>
+	</bean>
+
+
+	<!--属性注入 -->
+	<bean id="Bus" class="xyz.wadewhy.SpringDemo01.pojo.Bus">
+		<property name="provice">
+			<value>江西</value>
+		</property>
+	</bean>
+
+	<!--静态工厂注入 -->
+	<bean id="Car4" class="xyz.wadewhy.SpringDemo01.pojo.CarFactory"
+		factory-method="createCar"></bean>
+	<bean id="Car5" class="xyz.wadewhy.SpringDemo01.pojo.CarFactory"
+		factory-method="createCar1"></bean>
+	<!--非静态工厂注入 -->
+	<bean id="CarFactory" class="xyz.wadewhy.SpringDemo01.pojo.CarFactory" />
+	<bean id="Car6" factory-bean="CarFactory" factory-method="createCar2">
+	</bean>
+	
+	<!--注解注入-->
+	 <context:component-scan base-package="xyz.wadewhy.SpringDemo01.service"></context:component-scan>
+
+
+</beans>
