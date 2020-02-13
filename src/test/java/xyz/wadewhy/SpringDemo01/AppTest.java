@@ -2,8 +2,13 @@ package xyz.wadewhy.SpringDemo01;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import xyz.wadewhy.SpringDemo01.annotationBean.MyBeanConstructor;
+import xyz.wadewhy.SpringDemo01.annotationBean.MyConfiguration;
+import xyz.wadewhy.SpringDemo01.config.AppConf;
+import xyz.wadewhy.SpringDemo01.config.LoginService;
 import xyz.wadewhy.SpringDemo01.pojo.Bus;
 import xyz.wadewhy.SpringDemo01.pojo.Car;
 import xyz.wadewhy.SpringDemo01.pojo.Car2;
@@ -111,6 +116,27 @@ public class AppTest {
         System.out.println(dao_TestImpl);
         dao_TestImpl.add();
         System.out.println(dao_TestImpl.getName());
+
+    }
+
+    /**
+     * Java config注入
+     */
+    @Test
+    public void fun10() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConf.class);
+        LoginService loginservice = ac.getBean(LoginService.class);
+        System.out.println(loginservice.toString());
+    }
+
+    /**
+     * 注解模式下构造方法注入
+     */
+    @Test
+    public void fun11() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(MyConfiguration.class);
+        MyBeanConstructor myBeanConstructor = ac.getBean(MyBeanConstructor.class);
+        System.out.println(myBeanConstructor.toString());
 
     }
 }

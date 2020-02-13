@@ -1,7 +1,10 @@
 package xyz.wadewhy.SpringDemo01;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import xyz.wadewhy.SpringDemo01.config.AppConf;
+import xyz.wadewhy.SpringDemo01.config.LoginService;
 
 /*
  *
@@ -12,6 +15,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConf.class);
+        LoginService loginservice = ac.getBean(LoginService.class);
+        System.out.println(loginservice.toString());
     }
 }
