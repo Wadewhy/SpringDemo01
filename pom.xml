@@ -20,7 +20,7 @@
  <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version> 4.12</version>
+      <version> 4.13.1</version>
     </dependency>
     <!-- spring-context 会自动将 spring-core、spring-beans、spring-aop、spring-expression 这几个基础 jar 包带进来。 -->
   
